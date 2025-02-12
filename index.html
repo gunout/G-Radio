@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gleaphe Radio</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://github.com/gunout/Gleaphe-Radio/blob/main/accord%20des%20vieux.jpg?raw=true'); /* Remplacez par l'URL de votre image */
+            background-size: cover; /* Couvre tout l'écran */
+            background-position: center; /* Centre l'image */
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+
+        .radio-player {
+            background: rgba(20, 20, 20, 0.5); /* Rendre le fond plus translucide */
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 30px rgba(0, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            text-align: center;
+            width: 350px;
+            border: 2px solid #00ffff; /* Bordure cyan */
+        }
+
+        h1 {
+            font-family: 'Courier New', Courier, monospace;
+            color: #00ffff; /* Titre en cyan */
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ffff; /* Ombre de texte en cyan */
+        }
+
+        audio {
+            display: none; /* Cacher le lecteur audio standard */
+        }
+
+        .controls {
+            margin-top: 10px;
+        }
+
+        button {
+            background: rgba(0, 255, 255, 0.2); /* Fond des boutons en cyan clair */
+            border: 2px solid #00ffff; /* Bord des boutons en cyan */
+            border-radius: 5px;
+            color: #00ffff; /* Texte des boutons en cyan */
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: rgba(0, 255, 255, 0.5); /* Fond au survol en cyan */
+            transform: scale(1.05);
+        }
+
+        .cover {
+            margin: 15px 0;
+        }
+
+        .cover img {
+            max-width: 100%;
+            border-radius: 10px;
+            border: 2px solid #00ffff; /* Bordure de l'image en cyan */
+        }
+    </style>
+</head>
+<body>
+    <div class="radio-player">
+        <h1>Gleaphe Radio</h1>
+        <div class="cover">
+            <img id="logoImage" src="https://github.com/gunout/Gleaphe/blob/main/img/nocover.png?raw=true" alt="Logo de la radio">
+        </div>
+        <audio id="audio" preload="auto">
+            <source src="https://uk21freenew.listen2myradio.com/live.mp3?typeportmount=s1_16123_stream_253036203" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+        <div class="controls">
+            <button id="play" class="play">▶</button>
+            <button id="pause" class="pause">⏸</button>
+            <button id="stop" class="stop">■</button>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const playButton = document.getElementById('play');
+        const pauseButton = document.getElementById('pause');
+        const stopButton = document.getElementById('stop');
+
+        playButton.addEventListener('click', () => {
+            audio.play();
+        });
+
+        pauseButton.addEventListener('click', () => {
+            audio.pause();
+        });
+
+        stopButton.addEventListener('click', () => {
+            audio.pause();
+            audio.currentTime = 0; // Réinitialiser la lecture
+        });
+    </script>
+</body>
+</html>
