@@ -20,13 +20,18 @@
             overflow: hidden;
         }
 
-        .screencast-btn {
+        .top-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .screencast-btn, .webchat-btn {
             background: rgba(0, 255, 255, 0.2);
             border: 2px solid #00ffff;
             border-radius: 5px;
             color: #00ffff;
             padding: 10px 15px;
-            margin-bottom: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 16px;
@@ -34,7 +39,7 @@
             font-weight: bold;
         }
 
-        .screencast-btn:hover {
+        .screencast-btn:hover, .webchat-btn:hover {
             background: rgba(0, 255, 255, 0.5);
             transform: scale(1.05);
         }
@@ -168,7 +173,10 @@
     </style>
 </head>
 <body>
-    <button class="screencast-btn" onclick="window.location.href='https://gleaphe.duckdns.org';">S C R E E N C A S T</button>
+    <div class="top-buttons">
+        <button class="screencast-btn" onclick="window.location.href='https://gleaphe.duckdns.org';">S C R E E N C A S T</button>
+        <button class="webchat-btn" onclick="window.open('https://webchat-gleaphe.duckdns.org', '_blank')">W E B C H A T</button>
+    </div>
     
     <div class="radio-player">
         <h1>Gleaphe Radio</h1>
