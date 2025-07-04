@@ -4,20 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gleaphe Radio</title>
-    <button onclick="self.location.href='https://gleaphe.duckdns.org';">S C R E E N C A S T</button>
     <style>
         body {
             margin: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             background-image: url('https://github.com/gunout/Gleaphe-Radio/blob/main/accord%20des%20vieux.jpg?raw=true');
             background-size: cover;
             background-position: center;
             color: #ffffff;
             font-family: 'Courier New', Courier, monospace;
             overflow: hidden;
+        }
+
+        .screencast-btn {
+            background: rgba(0, 255, 255, 0.2);
+            border: 2px solid #00ffff;
+            border-radius: 5px;
+            color: #00ffff;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .screencast-btn:hover {
+            background: rgba(0, 255, 255, 0.5);
+            transform: scale(1.05);
         }
 
         .radio-player {
@@ -149,6 +168,8 @@
     </style>
 </head>
 <body>
+    <button class="screencast-btn" onclick="window.location.href='https://gleaphe.duckdns.org';">S C R E E N C A S T</button>
+    
     <div class="radio-player">
         <h1>Gleaphe Radio</h1>
         <div class="status" id="status">Prêt à jouer</div>
@@ -294,4 +315,3 @@
     </script>
 </body>
 </html>
-
