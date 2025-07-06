@@ -8,40 +8,15 @@
         body {
             margin: 0;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
             background-image: url('https://github.com/gunout/Gleaphe-Radio/blob/main/accord%20des%20vieux.jpg?raw=true');
             background-size: cover;
             background-position: center;
             color: #ffffff;
             font-family: 'Courier New', Courier, monospace;
             overflow: hidden;
-        }
-
-        .top-buttons {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .screencast-btn, .webchat-btn {
-            background: rgba(0, 255, 255, 0.2);
-            border: 2px solid #00ffff;
-            border-radius: 5px;
-            color: #00ffff;
-            padding: 10px 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 16px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .screencast-btn:hover, .webchat-btn:hover {
-            background: rgba(0, 255, 255, 0.5);
-            transform: scale(1.05);
         }
 
         .radio-player {
@@ -58,8 +33,15 @@
         h1 {
             font-family: 'Courier New', Courier, monospace;
             color: #00ffff;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             text-shadow: 0 0 10px #00ffff;
+        }
+
+        .header-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
         audio {
@@ -78,12 +60,12 @@
             border: 2px solid #00ffff;
             border-radius: 5px;
             color: #00ffff;
-            padding: 10px 15px;
-            margin: 5px;
+            padding: 8px 12px;
+            margin: 3px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 16px;
-            min-width: 70px;
+            font-size: 14px;
+            min-width: 60px;
         }
 
         button:hover {
@@ -173,13 +155,14 @@
     </style>
 </head>
 <body>
-    <div class="top-buttons">
-        <button class="screencast-btn" onclick="window.location.href='https://gleaphe.duckdns.org';">S C R E E N C A S T</button>
-        <button class="webchat-btn" onclick="window.open('https://webchat-gleaphe.duckdns.org', '_blank')">W E B C H A T</button>
-    </div>
-    
     <div class="radio-player">
         <h1>Gleaphe Radio</h1>
+        
+        <div class="header-buttons">
+            <button id="screencast">📺 Screencast</button>
+            <button id="webchat">💬 Webchat</button>
+        </div>
+        
         <div class="status" id="status">Prêt à jouer</div>
         
         <div class="cover">
@@ -224,10 +207,21 @@
         const loadingDisplay = document.getElementById('loading');
         const nowPlayingDisplay = document.getElementById('nowPlaying');
         const volumeLevelDisplay = document.getElementById('volumeLevel');
+        const screencastButton = document.getElementById('screencast');
+        const webchatButton = document.getElementById('webchat');
 
         // Initial volume setup
         audio.volume = 0.7;
         updateVolumeDisplay();
+
+        // Header buttons
+        screencastButton.addEventListener('click', () => {
+            window.open('https://gleaphe.duckdns.org', '_blank');
+        });
+
+        webchatButton.addEventListener('click', () => {
+            window.open('https://webchat-gleaphe.duckdns.org', '_blank');
+        });
 
         // Play button click handler
         playButton.addEventListener('click', () => {
