@@ -298,10 +298,9 @@
 
         // Simulate now playing (you would replace this with actual metadata from your stream)
         function updateNowPlaying() {
-            const tracks = [
-                "Artiste Inconnu - Titre Inconnu",
+            const tracks = [ 
                 "Various Artists - Stream en direct",
-                "Gleaphe Radio - Émission spéciale"
+                "Gleaphe Radio - Émission Week-End"
             ];
             nowPlayingDisplay.textContent = "En cours: " + tracks[Math.floor(Math.random() * tracks.length)];
             
