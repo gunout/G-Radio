@@ -151,6 +151,25 @@
             font-style: italic;
             min-height: 20px;
             color: #00ffff;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .now-playing span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scrollText 15s linear infinite;
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
         }
     </style>
 </head>
@@ -296,13 +315,16 @@
             volumeLevelDisplay.style.width = volumePercent + '%';
         }
 
-        // Simulate now playing (you would replace this with actual metadata from your stream)
+        // Simulate now playing with scrolling text
         function updateNowPlaying() {
             const tracks = [ 
                 "Various Artists - Stream en direct",
-                "Gleaphe Radio - Émission Hollyway"
+                "Gleaphe Radio - Émission Hollyway",
+           
             ];
-            nowPlayingDisplay.textContent = "En cours: " + tracks[Math.floor(Math.random() * tracks.length)];
+            
+            const nowPlayingText = "En cours: " + tracks[Math.floor(Math.random() * tracks.length)];
+            nowPlayingDisplay.innerHTML = `<span>${nowPlayingText}</span>`;
             
             // Change cover randomly (just for demo)
             if (Math.random() > 0.5) {
