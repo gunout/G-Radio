@@ -37,15 +37,15 @@
             text-shadow: 0 0 10px #00ffff;
         }
 
-        .header-buttons {
+        audio {
+            display: none;
+        }
+
+        .top-buttons {
+            margin-bottom: 15px;
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        audio {
-            display: none;
         }
 
         .controls {
@@ -53,6 +53,7 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
+            gap: 10px;
         }
 
         button {
@@ -60,23 +61,25 @@
             border: 2px solid #00ffff;
             border-radius: 5px;
             color: #00ffff;
-            padding: 8px 12px;
-            margin: 3px;
+            padding: 10px 15px;
+            margin: 2px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 14px;
-            min-width: 60px;
+            font-size: 16px;
+            min-width: 70px;
         }
 
         button:hover {
             background: rgba(0, 255, 255, 0.5);
             transform: scale(1.05);
+            box-shadow: 0 0 10px #00ffff;
         }
 
         button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         .cover {
@@ -151,25 +154,19 @@
             font-style: italic;
             min-height: 20px;
             color: #00ffff;
-            white-space: nowrap;
             overflow: hidden;
-            box-sizing: border-box;
-            width: 100%;
+            white-space: nowrap;
         }
 
-        .now-playing span {
+        .marquee {
             display: inline-block;
+            animation: marquee 15s linear infinite;
             padding-left: 100%;
-            animation: scrollText 15s linear infinite;
         }
 
-        @keyframes scrollText {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
         }
     </style>
 </head>
@@ -177,9 +174,10 @@
     <div class="radio-player">
         <h1>Gleaphe Radio</h1>
         
-        <div class="header-buttons">
-            <button id="screencast">Screencast Fermé</button>
-            <button id="webchat">💬 Webchat</button>
+        <!-- Boutons en haut -->
+        <div class="top-buttons">
+            <button id="btnScreencast">📺 Screencast</button>
+            <button id="btnWebchat">💬 Webchat</button>
         </div>
         
         <div class="status" id="status">Prêt à jouer</div>
@@ -188,7 +186,9 @@
             <img id="logoImage" src="https://github.com/gunout/Gleaphe/blob/main/img/nocover.png?raw=true" alt="Logo de la radio">
         </div>
         
-        <div class="now-playing" id="nowPlaying"></div>
+        <div class="now-playing">
+            <div class="marquee">En cours : Gleaphe Radio - Live</div>
+        </div>
         
         <div class="loading" id="loading">
             <div class="spinner"></div>
@@ -224,23 +224,13 @@
         const volumeDownButton = document.getElementById('volumeDown');
         const statusDisplay = document.getElementById('status');
         const loadingDisplay = document.getElementById('loading');
-        const nowPlayingDisplay = document.getElementById('nowPlaying');
         const volumeLevelDisplay = document.getElementById('volumeLevel');
-        const screencastButton = document.getElementById('screencast');
-        const webchatButton = document.getElementById('webchat');
+        const btnScreencast = document.getElementById('btnScreencast');
+        const btnWebchat = document.getElementById('btnWebchat');
 
         // Initial volume setup
         audio.volume = 0.7;
         updateVolumeDisplay();
-
-        // Header buttons
-        screencastButton.addEventListener('click', () => {
-            window.open('https://gleaphe.duckdns.org', '_blank');
-        });
-
-        webchatButton.addEventListener('click', () => {
-            window.open('https://webchat-gleaphe.duckdns.org', '_blank');
-        });
 
         // Play button click handler
         playButton.addEventListener('click', () => {
@@ -279,6 +269,16 @@
             }
         });
 
+        // Screencast button
+        btnScreencast.addEventListener('click', () => {
+            window.open('https://gleaphe.duckdns.org', '_blank');
+        });
+
+        // Webchat button
+        btnWebchat.addEventListener('click', () => {
+            window.open('https://webchat-gleaphe.duckdns.org', '_blank');
+        });
+
         // Audio event listeners
         audio.addEventListener('play', () => {
             statusDisplay.textContent = "En cours de lecture...";
@@ -314,27 +314,6 @@
             const volumePercent = Math.round(audio.volume * 100);
             volumeLevelDisplay.style.width = volumePercent + '%';
         }
-
-        // Simulate now playing with scrolling text
-        function updateNowPlaying() {
-            const tracks = [ 
-                "Various Artists - Stream en direct",
-                "Gleaphe Radio - Émission Hollyway",
-           
-            ];
-            
-            const nowPlayingText = "En cours: " + tracks[Math.floor(Math.random() * tracks.length)];
-            nowPlayingDisplay.innerHTML = `<span>${nowPlayingText}</span>`;
-            
-            // Change cover randomly (just for demo)
-            if (Math.random() > 0.5) {
-                document.getElementById('logoImage').src = "https://github.com/gunout/Gleaphe/blob/main/img/nocover.png?raw=true";
-            }
-        }
-
-        // Update now playing every 10 seconds (simulation)
-        setInterval(updateNowPlaying, 10000);
-        updateNowPlaying();
     </script>
 </body>
 </html>
